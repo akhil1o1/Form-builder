@@ -9,7 +9,6 @@ import { FormElement } from "./designer";
 import Designer from "./designer";
 import FormElementsPane from "./form-elements-pane";
 
-
 export default function FormBuilder() {
    const [forms, setForms] = useLocalStorage<FormType[]>("forms", []);
    const [editElement, setEditElement] = useState<Record<string, any>>();
@@ -36,6 +35,8 @@ export default function FormBuilder() {
          source.droppableId === destination.droppableId &&
          source.index === destination.index
       ) {
+         return;
+      } else if (destination.droppableId === "form-elements") {
          return;
       } else if (source.droppableId !== destination.droppableId) {
          // element dropped from elements pane to designer
